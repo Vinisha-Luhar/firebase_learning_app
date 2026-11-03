@@ -1,6 +1,8 @@
 
+import 'package:firebase_learning_app/features/authentication/presentation/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'firebase_options.dart';
 
@@ -11,7 +13,9 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const MyApp());
+  runApp(const ProviderScope(
+    child: MyApp()
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -22,14 +26,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Firebase Learning App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Firebase Learning'),
-        ),
-        body: const Center(
-          child: Text('Firebase initialized successfully!'),
-        ),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
+        useMaterial3: true,
       ),
+      home: const SignupScreen(),
     );
   }
 }
